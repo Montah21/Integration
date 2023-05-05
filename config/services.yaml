@@ -3,9 +3,18 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+#parameters:
+    #google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 parameters:
+    brochures_directory: '%kernel.project_dir%/public/uploads'
+
 
 services:
+    App\Service\WordFilterService:
+        autowire: true
+    App\EventListener\PostFormEventListener:
+        tags:
+            - { name: kernel.event_subscriber }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
